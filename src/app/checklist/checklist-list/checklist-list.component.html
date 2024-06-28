@@ -1,0 +1,35 @@
+<div id="content" class="container mt-5 p-4 h-75 rounded" style="font-size: 1.2em">
+  <div class="row">
+    <div class="col-3">
+      <div class="d-flex justify-content-start align-self-start">
+        <span style="font-size: 3em">Checklist</span>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="d-flex justify-content-end align-self-end">
+        <button mat-raised-button color="primary" [routerLink]="['/checklist/new']">Cadastrar</button>
+        <button mat-raised-button color="primary" (click)="reload()" class="ms-2">Recarregar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="list-group mat-elevation-z2 overflow-auto" style="max-height: 40em;">
+        <div *ngFor="let checklistItem of checklistItems" class="list-group-item list-group-item-action">
+          <app-checklist-list-item
+            [checklistItem]="checklistItem"
+            (itemChange)="alterItem($event)"
+            (deleteClick)="delete($event)">
+          </app-checklist-list-item>
+        </div>
+      </div>
+      <div *ngIf="checklistItems.length == 0" class="alert alert-warning" role="alert">
+        Nenhum item foi cadastrado ainda
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div style="width: 10px">
+    <mat-checkbox
+      [(ngModel)]="checklistItem.isCompleted"
+      (change)="eventCheck($event)"
+    >
+    </mat-checkbox>
+  </div>
+  <div class="col-3">
+    <span class="mb-0">{{checklistItem.description}}</span>
+  </div>
+  <div class="col-2">
+    <span class="">{{checklistItem.deadline | date : 'dd/MM/yyyy' : 'pt-BR'}}</span>
+  </div>
+  <div class="col-3">
+    <span class="">{{checklistItem.category.name}}</span>
+  </div>
+  <div class="col-2 d-flex justify-content-end align-items-end">
+    <button mat-raised-button color="primary" [routerLink]="['/checklist/edit', checklistItem.guid]">Editar</button>
+    <button mat-raised-button color="warn" class="ms-2" (click)="delete(checklistItem)">Excluir</button>
+  </div>
+</div>

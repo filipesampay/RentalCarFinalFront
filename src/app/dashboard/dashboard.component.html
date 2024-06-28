@@ -1,0 +1,35 @@
+<div class="text-center mt-5">
+  <span style="font-size: 4em">Dashboard</span>
+</div>
+
+<div class="text-center mt-5 mb-3">
+  <span style="font-size: 2em">Progresso do Projeto</span>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="progress rounded-5 mb-5" style="height: 50px; width: 100em">
+    <div class="progress-bar" role="progressbar" [style.width.%]="progress" style="font-size: 1.2em">{{progress}}% Completo</div>
+  </div>
+</div>
+
+
+<div class="text-center mt-5" *ngIf="checklistItems.length > 0">
+  <span style="font-size: 2em">Itens atrasados por categoria</span>
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+  <div class="d-flex flex-wrap justify-content-center">
+    <div *ngFor="let item of items" class="mat-elevation-z8 m-5 rounded-5">
+      <mat-card class="card rounded-4 p-2" style="background-color: #3f51b5; color: white">
+        <mat-card-header>
+          <mat-card-title-group class="d-flex justify-content-center align-items-center mt-3">
+            <mat-card-title style="font-size: 45px">{{item.categoryName}}</mat-card-title>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content class="mt-5" style="text-align: center">
+          <span style="font-size: 45px">{{item.amountItemLate}}</span>
+          <span class="row d-flex justify-content-center align-items-center mt-4" style="font-size: 20px">Itens Atrasadas</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-between align-items-center">
+  <span class="mb-0">{{category.name}}</span>
+  <div>
+    <button mat-raised-button color="primary" [routerLink]="['/category/edit', category.guid]">Editar</button>
+    <button mat-raised-button color="warn" class="ms-2" (click)="delete(category)">Excluir</button>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div id="content" class="container h-50 w-50 mt-5 p-4 rounded">
+  <div class="d-flex justify-content-center align-self-center">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{ title }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-self-center mt-5">
+    <form [formGroup]="form">
+      <div *ngIf="feedbackError" class="notify-error" [innerHTML]='feedbackMessage'></div>
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>Descrição</mat-label>
+          <input matInput formControlName="description">
+          <mat-error>Nome é obrigatório!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-4">
+          <mat-label>Data de Início</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="postedDate">
+          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-4">
+          <mat-label>Data de Término</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="deadline" readonly>
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-4">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let category of categories;" [value]="category.guid">{{ category.name }}</mat-option>
+          </mat-select>
+          <mat-error>Categoria é obrigatória!</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Está completa ?</label>
+          <mat-radio-group formControlName="isCompleted">
+            <mat-radio-button [value]="true">Sim</mat-radio-button>
+            <mat-radio-button [value]="false">Não</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end align-self-end mt-4">
+        <button mat-button (click)="onSubmit()" [disabled]="!this.form.valid" color="primary">Salvar</button>
+        <button mat-button [routerLink]="['/checklist']">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

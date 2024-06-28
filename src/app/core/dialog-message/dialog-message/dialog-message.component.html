@@ -1,0 +1,27 @@
+<mat-dialog-content>
+  <div class="centered-content">
+
+    <div *ngIf="isError">
+      <mat-icon class="mb-5">error</mat-icon>
+    </div>
+
+    <div *ngIf="isSuccess">
+      <mat-icon class="mb-5">check-circle</mat-icon>
+    </div>
+
+    <div *ngIf="isConfirm">
+      <mat-icon class="mb-5">warning</mat-icon>
+    </div>
+    <span [innerHTML]="message"></span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div *ngIf="isConfirm">
+    <button mat-button color="primary" (click)="onConfirm()">Confirmar</button>
+    <button mat-button color="danger" mat-dialog-close>Cancelar</button>
+  </div>
+
+  <div *ngIf="!isConfirm">
+    <button mat-button color="primary" mat-dialog-close>Ok</button>
+  </div>
+</mat-dialog-actions>
