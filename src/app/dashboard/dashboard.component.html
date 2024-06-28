@@ -12,7 +12,7 @@
 </div>
 
 
-<div class="text-center mt-5" *ngIf="checklistItems.length > 0">
+<div class="text-center mt-5" *ngIf="items.length > 0">
   <span style="font-size: 2em">Itens atrasados por categoria</span>
 </div>
 
@@ -26,7 +26,7 @@
           </mat-card-title-group>
         </mat-card-header>
         <mat-card-content class="mt-5" style="text-align: center">
-          <span style="font-size: 45px">{{item.amountItemLate}}</span>
+          <span style="font-size: 45px">{{item.amountItemsLate}}</span>
           <span class="row d-flex justify-content-center align-items-center mt-4" style="font-size: 20px">Itens Atrasadas</span>
         </mat-card-content>
       </mat-card>

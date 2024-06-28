@@ -6,6 +6,7 @@ import {CategoryService} from "../shared/category.service";
 import {ChecklistService} from "../shared/checklist.service";
 import {Category} from "../shared/category";
 import {ChecklistItem} from "../shared/checklistItem";
+import {Card} from "../shared/Card";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,54 +23,26 @@ import {ChecklistItem} from "../shared/checklistItem";
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  items: any = []
-  categories: Category[] = []
-  checklistItems: ChecklistItem[] = []
+  items: Card[] = []
   progress: number = 0
 
   constructor(private categoryService: CategoryService,
               private checklistService: ChecklistService)
   {
-    this.loadCategories()
+    this.loadCards()
     this.loadProgress()
   }
 
   ngOnInit() {
   }
 
-  loadCategories() {
-    this.categoryService.getAll().subscribe({
+  loadCards() {
+    this.categoryService.getAmountLateByCategory().subscribe({
       next: value => {
-        this.categories = value
-        this.loadChecklistItems()
+        this.items = value
+        this.items.sort((a: any, b: any) => a.categoryName.localeCompare(b.categoryName))
       }
     })
-  }
-
-  loadChecklistItems() {
-    this.checklistService.getAll().subscribe({
-      next: value => {
-        this.checklistItems = value
-        this.mountCardItems()
-      }
-    })
-  }
-
-  mountCardItems() {
-
-    for (let category of this.categories) {
-      // @ts-ignore
-      let listCheckItemFiltred = this.checklistItems.filter(item => item.category === category.guid && !item.isCompleted && new Date(item.deadline).getTime() < new Date().getTime())
-
-      let itemCard = {
-        categoryName: category.name,
-        amountItemLate: listCheckItemFiltred.length
-      }
-
-      this.items.push(itemCard)
-    }
-
-    this.items.sort((a: any, b: any) => a.categoryName.localeCompare(b.categoryName))
   }
 
   private loadProgress() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Category} from "./category";
 import {ChecklistItem} from "./checklistItem";
+import {Card} from "./Card";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class CategoryService {
 
   delete(guid: string) {
     return this.http.delete<Category>(`${this.baseUrl}/${guid}`)
+  }
+
+  getAmountLateByCategory(){
+    return this.http.get<Card[]>(`${this.baseUrl}/getAmountLateByCategory`);
   }
 }
